@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.daimajia.slider.library.Indicators.PagerIndicator;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
@@ -86,23 +87,25 @@ public class SecondFragment extends Fragment implements BaseSliderView.OnSliderC
 
 
         for(String name : file_maps.keySet()){
-            TextSliderView textSliderView = new TextSliderView(getActivity().getApplicationContext());
+            ImageSlider imageSlider = new ImageSlider(getActivity().getApplicationContext());
             // initialize a SliderLayout
-            textSliderView
-                    .description(name)
-                    .image(file_maps.get(name))
+            //TODO set name age and description
+            imageSlider.setDescription(name);
+            imageSlider.setInfo(name + "Age");
+            imageSlider.image(file_maps.get(name))
                     .setScaleType(BaseSliderView.ScaleType.Fit)
                     .setOnSliderClickListener(this);
 
             //add your extra information
-            textSliderView.bundle(new Bundle());
-            textSliderView.getBundle()
+            imageSlider.bundle(new Bundle());
+            imageSlider.getBundle()
                     .putString("extra",name);
 
-            mImageSlider.addSlider(textSliderView);
+            mImageSlider.addSlider(imageSlider);
         }
-        mImageSlider.setPresetTransformer(SliderLayout.Transformer.DepthPage);
+        mImageSlider.setPresetTransformer(SliderLayout.Transformer.Stack);
         mImageSlider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
+        mImageSlider.setIndicatorVisibility(PagerIndicator.IndicatorVisibility.Invisible);
         mImageSlider.stopAutoCycle();
         mImageSlider.addOnPageChangeListener(this);
 
