@@ -1,42 +1,18 @@
 package dontbefa.hcmut.dontbefa;
 
-import android.app.ProgressDialog;
-import android.graphics.Color;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.SearchView;
-import android.widget.Spinner;
 
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.daimajia.slider.library.Tricks.ViewPagerEx;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.model.PolylineOptions;
 
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.nio.charset.Charset;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 
 /**
@@ -102,7 +78,11 @@ public class SecondFragment extends Fragment implements BaseSliderView.OnSliderC
         HashMap<String,Integer> file_maps = new HashMap<String, Integer>();
 
         // TODO: add list image
-        // file_maps.put("Sample1",R.drawable.sample_0);
+        file_maps.put("Sample1",R.drawable.selfie1);
+        file_maps.put("Sample2",R.drawable.selfie2);
+        file_maps.put("Sample3",R.drawable.selfie3);
+        file_maps.put("Sample4",R.drawable.selfie4);
+        file_maps.put("Sample5",R.drawable.selfie5);
 
 
         for(String name : file_maps.keySet()){
