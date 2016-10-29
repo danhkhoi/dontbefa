@@ -73,16 +73,18 @@ public class ThirdFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        String[] prgmNameList={"Tuân", "Thiện", "Bảo", "Trung", "Tài", "Sơn", "Đông", "Khôi"};
-        int[] prgmImages={R.drawable.user_avatar,R.drawable.background,R.drawable.user_avatar,R.drawable.background,R.drawable.user_avatar,R.drawable.background,R.drawable.user_avatar,R.drawable.background};
+        String[] prgmNameList1={"Mai",  "Ngọc", "Linh"};
+        String[] prgmNameList2={"Châu", "My"};
+        int[] prgmImages1={R.drawable.avatar1,R.drawable.avatar2,R.drawable.avatar3};
+        int[] prgmImages2={R.drawable.avatar4,R.drawable.avatar5};
 
         GridView gv1, gv2;
         View view = inflater.inflate(R.layout.fragment_third, container, false);
         gv1 =(GridView) view.findViewById(R.id.gridView1);
-        gv1.setAdapter(new CustomAdapter(getActivity().getApplicationContext(), prgmNameList,prgmImages));
+        gv1.setAdapter(new CustomAdapter(getActivity().getApplicationContext(), prgmNameList1,prgmImages1));
 
         gv2 =(GridView) view.findViewById(R.id.gridView2);
-        gv2.setAdapter(new CustomAdapter(getActivity().getApplicationContext(), prgmNameList,prgmImages));
+        gv2.setAdapter(new CustomAdapter(getActivity().getApplicationContext(), prgmNameList2,prgmImages2));
 
         return view;
     }

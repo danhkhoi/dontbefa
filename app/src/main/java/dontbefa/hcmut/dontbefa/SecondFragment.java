@@ -1,11 +1,22 @@
 package dontbefa.hcmut.dontbefa;
 
+import android.content.res.Resources;
+import android.graphics.Point;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
+import android.view.Display;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
+import android.widget.TextView;
 
 import com.daimajia.slider.library.Indicators.PagerIndicator;
 import com.daimajia.slider.library.SliderLayout;
@@ -14,6 +25,8 @@ import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.daimajia.slider.library.Tricks.ViewPagerEx;
 
 import java.util.HashMap;
+
+import at.markushi.ui.CircleButton;
 
 
 /**
@@ -36,6 +49,12 @@ public class SecondFragment extends Fragment implements BaseSliderView.OnSliderC
     private SliderLayout mImageSlider;
 
     private SecondFragment.OnFragmentInteractionListener mListener;
+    private LinearLayout mainLayout;
+    private PopupWindow popUpWindow;
+    private boolean isClicked = true;
+    private TextView tvMsg;
+    private LinearLayout.LayoutParams layoutParams;
+    private LinearLayout containerLayout;
 
     /**
      * Use this factory method to create a new instance of
@@ -67,6 +86,13 @@ public class SecondFragment extends Fragment implements BaseSliderView.OnSliderC
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
+    public static int getScreenWidth() {
+        return Resources.getSystem().getDisplayMetrics().widthPixels;
+    }
+
+    public static int getScreenHeight() {
+        return Resources.getSystem().getDisplayMetrics().heightPixels;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -74,24 +100,36 @@ public class SecondFragment extends Fragment implements BaseSliderView.OnSliderC
         // Inflate the layout for this fragment
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_second, container, false);
+        mainLayout = (LinearLayout) view.findViewById(R.id.main_layout);
+        containerLayout = new LinearLayout(getActivity().getApplicationContext());
+        popUpWindow = new PopupWindow(getActivity().getApplicationContext());
+        tvMsg = new TextView(getActivity().getApplicationContext());
+        tvMsg.setText("Hi this is pop up window...");
+
+        layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT);
+        containerLayout.setOrientation(LinearLayout.VERTICAL);
+        containerLayout.addView(tvMsg, layoutParams);
+        popUpWindow.setContentView(containerLayout);
 
         mImageSlider = (SliderLayout) view.findViewById(R.id.image_browser_slider);
         HashMap<String,Integer> file_maps = new HashMap<String, Integer>();
 
         // TODO: add list image
-        file_maps.put("Sample1",R.drawable.selfie1);
-        file_maps.put("Sample2",R.drawable.selfie2);
-        file_maps.put("Sample3",R.drawable.selfie3);
-        file_maps.put("Sample4",R.drawable.selfie4);
-        file_maps.put("Sample5",R.drawable.selfie5);
+        file_maps.put("Lê, 22@Graphics designer",R.drawable.selfie1);
+        file_maps.put("Trang, 25@HUFLIT",R.drawable.selfie2);
+        file_maps.put("Hương, 23@Happy Alma",R.drawable.selfie3);
+        file_maps.put("Hoàng, 22@Eastern International",R.drawable.selfie4);
+        file_maps.put("Naomi, 22@Sacombank",R.drawable.selfie5);
 
 
         for(String name : file_maps.keySet()){
             ImageSlider imageSlider = new ImageSlider(getActivity().getApplicationContext());
             // initialize a SliderLayout
             //TODO set name age and description
-            imageSlider.setDescription(name);
-            imageSlider.setInfo(name + "Age");
+            String[] split = name.split("@");
+            imageSlider.setDescription(split[1]);
+            imageSlider.setInfo(split[0]);
             imageSlider.image(file_maps.get(name))
                     .setScaleType(BaseSliderView.ScaleType.Fit)
                     .setOnSliderClickListener(this);
@@ -108,6 +146,26 @@ public class SecondFragment extends Fragment implements BaseSliderView.OnSliderC
         mImageSlider.setIndicatorVisibility(PagerIndicator.IndicatorVisibility.Invisible);
         mImageSlider.stopAutoCycle();
         mImageSlider.addOnPageChangeListener(this);
+        CircleButton btnYes = (CircleButton) view.findViewById(R.id.btn_yes);
+        btnYes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isClicked) {
+                    isClicked = false;
+                    popUpWindow.showAtLocation(mainLayout, Gravity.CENTER, 0, 0);
+
+                    popUpWindow.update(320,90);
+                    //popUpWindow.showAtLocation(mainLayout, Gravity.BOTTOM, 10, 10);
+
+                    /*int Measuredheight = getScreenHeight();
+                    int Measuredwidth = getScreenWidth();
+                    popUpWindow.update(Measuredheight/2-160, Measuredwidth/2-45, 320, 90);*/
+                } else {
+                    isClicked = true;
+                    popUpWindow.dismiss();
+                }
+            }
+        });
 
         return view;
     }
