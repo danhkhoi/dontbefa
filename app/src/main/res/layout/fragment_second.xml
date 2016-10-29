@@ -26,6 +26,7 @@
                 android:layout_width="64dp"
                 android:layout_height="64dp"
                 android:elevation="3dp"
+                android:stateListAnimator="@anim/button_state_list_animator"
                 android:padding="16dp"
                 android:src="@drawable/nope"
                 app:cb_color="#FFFFFF"
