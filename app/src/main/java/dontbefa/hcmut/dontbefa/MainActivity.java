@@ -42,9 +42,9 @@ public class MainActivity extends AppCompatActivity {
                 TabLayout.Tab tab = tabLayout.getTabAt(i);
                 int id = 0;
                 switch (i) {
-                    case 0: id = R.drawable.logo_1;break;
-                    case 1: id = R.drawable.logo_2;break;
-                    case 2: id = R.drawable.logo_3;break;
+                    case 0: id = R.drawable.usericon;break;
+                    case 1: id = R.drawable.search;break;
+                    case 2: id = R.drawable.msg;break;
                     default: break;
                 }
                 if (tab != null) {
